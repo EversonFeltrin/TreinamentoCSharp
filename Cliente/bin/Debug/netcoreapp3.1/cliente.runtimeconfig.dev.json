@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Pandão\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Pandão\\.nuget\\packages"
+    ]
+  }
+}
