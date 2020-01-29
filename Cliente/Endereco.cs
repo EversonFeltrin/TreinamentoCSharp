@@ -4,13 +4,13 @@ namespace cliente
 {
     public class Endereco
     {
-        public string nomeRua;
-        public string CEP;
-        public int numeroResidencia;
-        public string cidade;
-        public string estado;
+        private string nomeRua;
+        private string CEP;
+        private int numeroResidencia;
+        private string cidade;
+        private string estado;
 
-        public string tipoEndereco;
+        private string tipoEndereco;
 
         public Endereco(string nomeRua, string CEP, int numeroResidencia, string cidade, string estado, string tipoEndereco )
         {
@@ -27,8 +27,16 @@ namespace cliente
 
         }
 
-        public string GetAddress(){
+        public string GetAddress()
+        {
             return $"Rua {nomeRua}, {numeroResidencia}, CEP: {CEP}, {cidade} - {estado}";
+        }
+
+        // "Tipo" ao invés de "Type", porque a classe Object já tem
+        // um método "GetType()", e dá conflito.
+        public string GetTipo()
+        {
+            return tipoEndereco;
         }
     }
 }

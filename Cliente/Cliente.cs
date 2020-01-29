@@ -6,23 +6,16 @@ namespace cliente{
     public class Cliente
         {
             // Atributos de um cliente
-            public string nome{get; set;}
-            public int idade;
-            public char sexo;
+            private string nome;
+            private int idade;
+            private char sexo;
 
-            public string carteiraMotorista;
-            public string numeroReservista;
+            private string carteiraMotorista;
+            private string numeroReservista;
             
-            public List<Endereco> endereco;
+            private List<Endereco> endereco;
             
             
-            
-            public Cliente()
-            {
-                Controller controller = new Controller();
-                controller.CreateClient();
-            }
-
             public Cliente(string nome, int idade, char sexo)
             {
                 this.nome = nome;
@@ -111,5 +104,39 @@ namespace cliente{
                 return this.nome == nome;
             }
 
+            public bool ModifyName(string name)
+            {
+                if(String.IsNullOrWhiteSpace(name))
+                    return false;
+
+                nome = name;
+                return true;
+            }
+
+            public bool ModifyAge(int age)
+            {
+
+                idade = age;
+                /*
+                 * Se a idade corrigida for menor de 18,
+                 * remove carteira de motorista e certificado de
+                 * reservista.
+                 * Não é necessário verificar se estão preenchidas,
+                 * visto que, no final, será vazio de qualquer forma.
+                 */
+                if(!IsOfLegalAge())
+                {
+                    carteiraMotorista = numeroReservista = "";
+                    foreach(var end in endereco)
+                    {
+                        if (end.GetTipo() == "Comercial")
+                            endereco.Remove(end);
+                    }
+
+                    return false;
+                }
+
+                return true;
+            }
     }
 }
