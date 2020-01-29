@@ -1,5 +1,3 @@
-using System;
-
 namespace cliente
 {
     public class Endereco

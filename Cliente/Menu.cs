@@ -10,20 +10,46 @@ public class Menu
     public decimal LerDecimal()
     {
         string PalavraRecebida = Console.ReadLine();
-        decimal PalavraConvertida = Convert.ToDecimal(PalavraRecebida);
+        decimal PalavraConvertida;
+        try
+        {
+            PalavraConvertida = Convert.ToDecimal(PalavraRecebida);
+        }
+        catch
+        {
+            PalavraConvertida = 0M;
+        }
         return PalavraConvertida;
     }
 
     public int LerInt()
     {
         string PalavraRecebida = Console.ReadLine();
-        int PalavraConvertida = Convert.ToInt32(PalavraRecebida);
+        int PalavraConvertida;
+        try
+        {
+            PalavraConvertida = Convert.ToInt32(PalavraRecebida);
+        }
+        catch
+        {
+            PalavraConvertida = 0;
+        }
         return PalavraConvertida;
     }
 
     public DateTime LerData()
     {
-        return DateTime.Now;
+        string leitura = Console.ReadLine();
+        DateTime data;
+        try
+        {
+            data = Convert.ToDateTime(leitura);
+        }
+        catch (System.Exception)
+        {
+            data = DateTime.Today;
+        }
+        return data;
     }
     public void Escrever(string PalavraRecebida)
     {

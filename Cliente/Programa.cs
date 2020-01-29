@@ -12,12 +12,11 @@ public class Programa
     //private bool emExecucao = 1;
     public void Executar()
     {
-        // algum loop
         int opcao = 0;
         while(opcao != 6)
         {
+            menu.LimparTela();
             ExibeMenu();
-            var menu = new Menu();
             opcao = menu.LerInt();
             
             switch (opcao)
@@ -50,6 +49,8 @@ public class Programa
                 default:
                     break;                
             }
+            menu.Escrever("Pressione enter para continuar");
+            menu.LerString();
         }
             
     }

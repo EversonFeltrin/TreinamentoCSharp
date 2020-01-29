@@ -91,7 +91,7 @@ namespace cliente{
 
             public bool DefineAddress(Endereco endereco)
             {
-                if (!IsOfLegalAge() && endereco.tipoEndereco == "Comercial")
+                if (!IsOfLegalAge() && endereco.GetTipo() == "Comercial")
                     return false;
                 
                 this.endereco.Add(endereco);
