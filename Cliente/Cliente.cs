@@ -184,5 +184,15 @@ namespace cliente{
             return result;
         }
 
+        public string GetNome()
+        {
+            return nome;
+        }
+
+        public List<Endereco> GetEndereco()
+        {
+            return this.endereco;
+        }
+
    }
 }

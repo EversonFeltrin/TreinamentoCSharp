@@ -165,7 +165,7 @@ public class Programa
                 menu.Escrever(cliente.GetClientData());
                 menu.Escrever("Qual informação deseja alterar:\n" 
                 + "1 - Nome\n2-Idade\n3-Sexo\n4-Numero de Reservista\n"
-                + "5-CNH\n6-Endereco\n");
+                + "5-CNH\n6-Endereco\n7-sair\n");
                 var opcao = menu.LerInt();
 
                 switch(opcao)
@@ -213,7 +213,10 @@ public class Programa
                     case 6:
                         menu.Escrever("Não implementado");
                         break;
-                    
+
+                    case 7:
+                        menu.Escrever("Saindo da edição");
+                        return;
                 }
             }
         }
@@ -239,12 +242,21 @@ public class Programa
     }
     public void Exportar()
     {
-        var file = new StreamWriter("export.csv");
-        file.WriteLine("nome,idade,sexo,CNH,reservista");
-        foreach(var c in clientes)
-            file.WriteLine(c.ExportDataAsCSV());
+        var fileCliente = new StreamWriter("clientes.csv");
+        var fileEndereco = new StreamWriter("enderecos.csv");
+        fileCliente.WriteLine("nome,idade,sexo,CNH,reservista");
+        fileEndereco.WriteLine("nome,rua,numero,cep,cidade,estado,tipo");
 
-        file.Close();
+        foreach(var c in clientes)
+        {
+            fileCliente.WriteLine(c.ExportDataAsCSV());
+            foreach(var e in c.GetEndereco())
+            {
+                fileEndereco.WriteLine(c.GetNome() + "," + e.ExportDataAsCSV());
+            }
+        }
+        fileCliente.Close();
+        fileEndereco.Close();
     }
 }
 }
