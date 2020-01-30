@@ -139,5 +139,27 @@ namespace cliente{
             return true;
         }
 
+        public bool ModifySex(string sex)
+        {
+            sexo = sex.ToCharArray()[0];
+
+            /* Se o sexo alterado do cliente for feminino,
+             * perde o "direito" (convenhamos, é obrigação estatal) de
+             * possuir certificado de reservista.
+             * retorna falso pra indicar que teve essa alteração
+             */
+            if(sexo == 'f')
+            {
+                numeroReservista = "";
+                return false;
+            }
+
+            /* Caso tenha sido alterado pra masculino, 
+             * não houve conflitos de regras.
+             * retorna true pra indicar isto.
+             */
+            return true;
+        }
+
    }
 }

@@ -161,22 +161,77 @@ public class Programa
                 menu.Escrever(cliente.GetClientData());
                 menu.Escrever("Qual informação deseja alterar:\n" 
                 + "1 - Nome\n2-Idade\n3-Sexo\n4-Numero de Reservista\n"
-                + "5-CNH\nEndereco\n");
+                + "5-CNH\n6-Endereco\n");
                 var opcao = menu.LerInt();
 
                 switch(opcao)
                 {
                     case 1:
                         menu.Escrever("Digite o nome");
-                        cliente.SetName(menu.LerString());
+                        if(cliente.ModifyName(menu.LerString()))
+                            menu.Escrever("Nome alterado com sucesso");
+                        else
+                            menu.Escrever("Nome não pode ser vazio");
                         break;
+
+                    case 2:
+                        menu.Escrever("Digite a idade");
+                        if(cliente.ModifyAge(menu.LerInt()))
+                            menu.Escrever("Idade alterada sem conflitos");
+                        else
+                            menu.Escrever("Removido Carteira de motorista e/ou reservista");
+                        break;
+
+                    case 3:
+                        menu.Escrever("Digite o sexo");
+                        if(cliente.ModifySex(menu.LerString()))
+                            menu.Escrever("Sexo alterado sem problema");
+                        else
+                            menu.Escrever("Cliente não pode mais ter carteira de reservista\n");
+                        break;
+
+                    case 4:
+                        menu.Escrever("Digite o número de reservista");
+                        if(cliente.FillMilitaryReserveNumber(menu.LerString()))
+                            menu.Escrever("Sucesso");
+                        else
+                            menu.Escrever("Cliente menor de idade ou do sexo feminino");
+                        break;
+
+                    case 5:
+                        menu.Escrever("Digite o número da carteira de motorista");
+                        if(cliente.FillDriversLicense(menu.LerString()))
+                            menu.Escrever("Sucesso");
+                        else
+                            menu.Escrever("Cliente menor de idade");
+                        break;
+
+                    case 6:
+                        menu.Escrever("Não implementado");
+                        break;
+                    
                 }
             }
         }
     }
     public void Remover()
     {
-
+        menu.Escrever("Qual cliente deseja remover?");
+        var nomeCliente = menu.LerString();
+        foreach(var cliente in clientes)
+        {
+            /*
+             * Procura o cliente pelo nome
+             * Caso encontre, remove da lista de clientes
+             * Retorna para evitar remoção múltipla.
+             */
+            if(cliente.FindByName(nomeCliente))
+            {
+                clientes.Remove(cliente);
+                return;
+            }
+                
+        }
     }
     public void Exportar()
     {
