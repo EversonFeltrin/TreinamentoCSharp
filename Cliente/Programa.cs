@@ -167,6 +167,8 @@ public class Programa
                 switch(opcao)
                 {
                     case 1:
+                        menu.Escrever("Digite o nome");
+                        cliente.SetName(menu.LerString());
                         break;
                 }
             }
