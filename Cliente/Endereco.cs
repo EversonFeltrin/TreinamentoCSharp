@@ -20,9 +20,29 @@ namespace cliente
             this.tipoEndereco = tipoEndereco;
         }
 
-        public Endereco(string CEP, string tipoEndereco) : this("", CEP, 0, "", "", tipoEndereco)
+        public Endereco(string CEP, string tipoEndereco)
         {
+            var data = new System.Data.DataSet();
+            try
+            {
+                data.ReadXml("http://cep.republicavirtual.com.br/web_cep.php?cep=" + CEP.Replace("-","").Trim());
+                var resultado = data.Tables[0].Rows[0];
+                this.nomeRua = resultado["logradouro"].ToString().Trim();
+                this.cidade = resultado["cidade"].ToString().Trim();
+                this.estado = resultado["uf"].ToString().Trim();
+                this.numeroResidencia = 0; //Cep não carrega número da casa
 
+            }
+            catch (System.Exception)
+            {
+                
+                this.nomeRua = "";
+                this.cidade = "";
+                this.estado = "";
+                this.numeroResidencia = 0; 
+            }
+                this.CEP = CEP;
+                this.tipoEndereco = tipoEndereco;
         }
 
         public string GetAddress()
