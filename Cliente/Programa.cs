@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace cliente
 {
@@ -24,28 +25,31 @@ public class Programa
                 case 1:
                     //Listar Clientes
                     Listar();
+                    break;
 
-                break;
                 case 2:
                     //Cadastrar Clientes
                     Cadastrar();
-                break;
+                    break;
+
                 case 3:
-                    //Editar Cliente
+                    Editar();
+                    break;
 
-                break;
                 case 4:
-                    //Remover Clientes
+                    Remover();
+                    break;
 
-                break;
                 case 5:
                     //Exportar Informações
-
-                break;
+                    Exportar();
+                    break;
+                    
                 case 6:
                     menu.Escrever("Saindo");
                     //Sair
                     break;
+
                 default:
                     break;                
             }
@@ -235,7 +239,12 @@ public class Programa
     }
     public void Exportar()
     {
+        var file = new StreamWriter("export.csv");
+        file.WriteLine("nome,idade,sexo,CNH,reservista");
+        foreach(var c in clientes)
+            file.WriteLine(c.ExportDataAsCSV());
 
+        file.Close();
     }
 }
 }

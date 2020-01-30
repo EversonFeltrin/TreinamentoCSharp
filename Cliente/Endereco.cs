@@ -56,5 +56,17 @@ namespace cliente
         {
             return tipoEndereco;
         }
+
+        public string ExportDataAsCSV(){
+            var result = "";
+            result += nomeRua + ",";
+            result += numeroResidencia.ToString() + ",";
+            result += cidade + ",";
+            result += estado + ",";
+            result += CEP + ",";
+            result += tipoEndereco + ",";
+
+            return result;
+        }
     }
 }

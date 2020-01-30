@@ -161,5 +161,28 @@ namespace cliente{
             return true;
         }
 
+        public string ExportDataAsCSV()
+        {
+            string result = "";
+            result += nome + ",";
+            result += idade.ToString() + ",";
+            result += sexo.ToString() + ",";
+            result += carteiraMotorista + ",";
+            result += numeroReservista + ",";
+
+            /*
+             * esse bloco adicionaria todos os endereços do cliente
+             * na string formatada em CSV.
+             * Porém, como o cliente pode ter mais de um endereço, e
+             * arquivos em CSV não são escaláveis dessa forma,
+             * resolvi deixar comentado.
+            foreach(var end in endereco)
+            {
+                result += end.ExportDataAsCSV();
+            }
+            */
+            return result;
+        }
+
    }
 }
